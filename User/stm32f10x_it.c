@@ -27,6 +27,7 @@
 #include "stm32f10x_it.h"
 #include "bsp_usart.h"
 #include "WifiUsart.h"
+#include "stdbool.h"
 
 extern void TimingDelay_Decrement(void);
 
@@ -140,13 +141,31 @@ void SysTick_Handler(void)
 }
 
 // 串口中断服务函数
+bool bFlagRun = false;
 void DEBUG_USART_IRQHandler(void)
 {
   	uint8_t ucTemp;
 	if(USART_GetITStatus(DEBUG_USARTx,USART_IT_RXNE)!=RESET)
 	{		
 		ucTemp = USART_ReceiveData(DEBUG_USARTx);
-    USART_SendData(DEBUG_USARTx,ucTemp);    
+
+		if(CmdUART_RxPtr < (CmdUART_RX_BUFFER_SIZE - 1))
+        {
+                CmdUART_RxBuffer[CmdUART_RxPtr] = ucTemp;
+                CmdUART_RxBuffer[CmdUART_RxPtr + 1]=0x00;
+                CmdUART_RxPtr++;
+        }
+		else
+        {
+                CmdUART_RxBuffer[UART_RxPtr - 1] = ucTemp;
+                
+        }
+
+		//如果为回车键，则开始处理串口数据
+        if (ucTemp == 35)
+        {
+            bFlagRun = true;
+        }
 	}	 
 }
 

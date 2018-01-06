@@ -35,3 +35,5 @@
 ..\..\output\main.o: ..\..\User\uart3\WifiUsart.h
 ..\..\output\main.o: ..\..\User\esp8266\ESP8266.h
 ..\..\output\main.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\..\output\main.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\..\output\main.o: ..\..\User\stm32f10x_it.h

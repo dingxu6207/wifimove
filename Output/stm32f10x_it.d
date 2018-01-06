@@ -32,3 +32,4 @@
 ..\..\output\stm32f10x_it.o: ..\..\User\uart1\bsp_usart.h
 ..\..\output\stm32f10x_it.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 ..\..\output\stm32f10x_it.o: ..\..\User\uart3\WifiUsart.h
+..\..\output\stm32f10x_it.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h

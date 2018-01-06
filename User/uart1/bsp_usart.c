@@ -17,6 +17,14 @@
 	
 #include "bsp_usart.h"
 
+
+  //串口接收数组
+ char CmdUART_RxBuffer[CmdUART_RX_BUFFER_SIZE];
+  
+  //串口接收数组指针
+ unsigned char CmdUART_RxPtr;
+
+
  /**
   * @brief  配置嵌套向量中断控制器NVIC
   * @param  无
@@ -175,3 +183,9 @@ int fgetc(FILE *f)
 		return (int)USART_ReceiveData(DEBUG_USARTx);
 }
 
+//清空发送缓冲
+void CmdUsart_FlushRxBuffer(void)
+{
+  CmdUART_RxPtr = 0;
+  CmdUART_RxBuffer[CmdUART_RxPtr] = 0;
+}
