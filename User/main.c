@@ -14,12 +14,13 @@ void SetWifiConnect(void);
 void SetIP(char *pReIP);
 
 char ipstr[100] = {0};
-char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.70\",8080";
+char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
 void SetIP(char *pReIP)
 {
 	pReIP = pReIP + 3;
 	sprintf ( ipstr, "\"%s\",\"%s\",%s", "TCP", pReIP, "8080" );
 	sprintf ( Cmdstr, "AT+CIPSTART=%s", ipstr );
+	printf("ip is ok!\n");
 }
 
 void SetWifiConnect(void)
@@ -63,11 +64,13 @@ void SetWifiConnect(void)
   */
 //:FW192.168.**.**#
 extern bool bFlagRun;
+extern bool bRunMotor;
+u8 Stepcounter = 0;
 int main(void)
 {	
 
 	char cStr [ 100 ] = { 0 };
-	
+	int i;
 	/* LED ¶Ë¿Ú³õÊ¼»¯ */
 	LED_GPIO_Config();
 
@@ -99,13 +102,25 @@ int main(void)
 			bFlagRun = false;
 			CmdUsart_FlushRxBuffer();
 		}
-		else
+
+		if (bRunMotor == true)		
 		{   
-			  Delay_ms(1000);
-			 // printf("%s\n", pIP);
-			  sprintf ( cStr, "UART_RxBuffer[0] = %s\n", UART_RxBuffer);
-			  WifiUsart_SendString(USART3, cStr);
-			  uart_FlushRxBuffer();
+			if (UART_RxBuffer[0] == ':')
+				if (UART_RxBuffer[1] == 'F')
+				{
+					if (UART_RxBuffer[2] == '+')
+					{
+						for(i = 0; i < 2600; i++)
+						Movestep();
+						Stepcounter++;
+						sprintf ( cStr, "Moving %d is ok!\n", Stepcounter);
+			  			WifiUsart_SendString(USART3, cStr);
+					}
+				}
+			  
+				uart_FlushRxBuffer();
+			  bRunMotor =false;
+			  
 		}		
 		
 		

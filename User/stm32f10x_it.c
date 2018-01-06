@@ -171,6 +171,7 @@ void DEBUG_USART_IRQHandler(void)
 
 
 // 串口中断服务函数
+bool bRunMotor = false;
 void DEBUG_USART3_IRQHandler(void) 
 {
   	
@@ -192,7 +193,11 @@ void DEBUG_USART3_IRQHandler(void)
                 UART_RxBuffer[UART_RxPtr - 1] = data;
                 
         }
-		
+
+		if (data == 35)
+		{
+			bRunMotor = true;
+		}
 	}	 
 }
 

@@ -21,6 +21,20 @@
 #define LED3_GPIO_CLK 	    RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
 #define LED3_GPIO_PIN		GPIO_Pin_1			        /* 连接到SCL时钟线的GPIO */
 
+//EN引脚
+#define EN_GPIO_PORT    	GPIOA			              /* GPIO端口 */
+#define EN_GPIO_CLK 	    RCC_APB2Periph_GPIOA		/* GPIO端口时钟 */
+#define EN_GPIO_PIN		    GPIO_Pin_4			        /* 连接到SCL时钟线的GPIO */
+
+//IN1引脚
+#define IN1_GPIO_PORT    	GPIOA			              /* GPIO端口 */
+#define IN1_GPIO_CLK 	    RCC_APB2Periph_GPIOA		/* GPIO端口时钟 */
+#define IN1_GPIO_PIN		  GPIO_Pin_2			        /* 连接到SCL时钟线的GPIO */
+
+//IN2引脚
+#define IN2_GPIO_PORT    	GPIOA			              /* GPIO端口 */
+#define IN2_GPIO_CLK 	    RCC_APB2Periph_GPIOA		/* GPIO端口时钟 */
+#define IN2_GPIO_PIN		  GPIO_Pin_3			        /* 连接到SCL时钟线的GPIO */
 
 /** the macro definition to trigger the led on or off 
   * 1 - off
@@ -116,5 +130,6 @@
 					LED3_OFF
 
 void LED_GPIO_Config(void);
+void Movestep(void);
 
 #endif /* __LED_H */
