@@ -14,7 +14,7 @@ void SetWifiConnect(void);
 void SetIP(char *pReIP);
 
 char ipstr[100] = {0};
-char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
+char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.70\",8080";
 void SetIP(char *pReIP)
 {
 	pReIP = pReIP + 3;
@@ -79,7 +79,8 @@ int main(void)
 	WifiUSART_Config();
 	
 	//SetWifiConnect();
-	
+	bFlagRun = true;
+	sprintf(CmdUART_RxBuffer, ":FY#");
 	while(1)
 	{		
 		if (bFlagRun == true)
