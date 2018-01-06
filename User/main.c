@@ -5,14 +5,19 @@
 #include "WifiUsart.h"
 #include "ESP8266.h"
 #include "stdio.h"
+#include <string.h>  
+
 /**
   * @brief  主函数
   * @param  无  
   * @retval 无
   */
+
 int main(void)
 {	
 	int i;
+	char cStr [ 100 ] = { 0 };
+	
 	/* LED 端口初始化 */
 	LED_GPIO_Config();
 
@@ -44,14 +49,31 @@ int main(void)
 
 	for(i = 0; i < 3 ;i++)
 	ESP8266_Set("AT+CIPSEND");
+  
+	Delay_ms(1000);
+	if (strstr(UART_RxBuffer, "OK"))
+	{
+			uart_FlushRxBuffer();
+		  printf("wifi is ok!\n");
+	}
+		
 	
 	while(1)
 	{
-		Delay_ms(1000);
-		printf("%s\n", UART_RxBuffer);
+		
+	
 		
 		Delay_ms(1000);
-		//uart_FlushRxBuffer();
+		//printf("%s\n", UART_RxBuffer);
+		
+		sprintf ( cStr, "UART_RxBuffer[0] = %s\n", UART_RxBuffer);
+		//printf("%s\n", cStr);
+		
+		WifiUsart_SendString(USART3, cStr);
+			
+		
+		uart_FlushRxBuffer();
+		
 	}	
 	
 }
