@@ -118,9 +118,17 @@ void Movestep(void)
 	Delay_ms(5);
 
 	/* ¹Ø±Õµç»ú */
-	GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_4);	
+}
 
-	
+void ESP8266_Rst ( void )
+{
+
+	 macESP8266_RST_LOW_LEVEL();
+	 Delay_ms ( 500 ); 
+	 macESP8266_RST_HIGH_LEVEL();
+
+
 }
 
 /*********************************************END OF FILE**********************/

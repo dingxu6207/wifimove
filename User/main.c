@@ -24,13 +24,15 @@ void SetIP(char *pReIP)
 }
 
 void SetWifiConnect(void)
-{ int i;
+{ 	int i;
+
+	ESP8266_Rst();
 	
 	for(i = 0; i < 3 ;i++)
-	ESP8266_Set("AT"); //设置路由器模式 1 station模式 2 AP
+	ESP8266_Set("AT+RST"); //测试
  
 	for(i = 0; i < 3 ;i++)
-	ESP8266_Set("AT+CWMODE=1");     //重新启动wifi模块
+	ESP8266_Set("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP
   
 	for(i = 0; i < 5;i++)
 	ESP8266_Set("AT+CWJAP=\"A304\",\"wildfire\"");
@@ -42,17 +44,17 @@ void SetWifiConnect(void)
 	//ESP8266_Set("AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080");  //启动TCP/IP 端口为8080 实现基于网络//控制
 	ESP8266_Set(Cmdstr);
 	
-	for(i = 0; i < 5 ;i++)
-  ESP8266_Set("AT+CIPMODE=1");//AT+CIPSEND
+	for(i = 0; i < 3 ;i++)
+  	ESP8266_Set("AT+CIPMODE=1");//透传模式
 
 	for(i = 0; i < 3 ;i++)
-	ESP8266_Set("AT+CIPSEND");
+	ESP8266_Set("AT+CIPSEND");//检测是否连接成功
   
 	Delay_ms(1000);
 	if (strstr(UART_RxBuffer, "OK"))
 	{
 		  uart_FlushRxBuffer();
-		  printf("wifi is ok!\n");
+		  printf("set wifi is ok!\n");
 	}
 }
 
@@ -116,9 +118,11 @@ int main(void)
 						sprintf ( cStr, "Moving %d is ok!\n", Stepcounter);
 			  			WifiUsart_SendString(USART3, cStr);
 					}
+					else if(UART_RxBuffer[2] == 'Q')
+						GPIO_ResetBits(GPIOA, GPIO_Pin_4);					
 				}
 			  
-				uart_FlushRxBuffer();
+			  uart_FlushRxBuffer();
 			  bRunMotor =false;
 			  
 		}		

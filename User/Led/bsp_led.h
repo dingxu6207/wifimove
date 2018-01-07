@@ -36,6 +36,10 @@
 #define IN2_GPIO_CLK 	    RCC_APB2Periph_GPIOA		/* GPIO端口时钟 */
 #define IN2_GPIO_PIN		  GPIO_Pin_3			        /* 连接到SCL时钟线的GPIO */
 
+
+#define     macESP8266_RST_HIGH_LEVEL()        GPIO_SetBits ( LED1_GPIO_PORT, LED1_GPIO_PIN )
+#define     macESP8266_RST_LOW_LEVEL()         GPIO_ResetBits ( LED1_GPIO_PORT, LED1_GPIO_PIN )
+
 /** the macro definition to trigger the led on or off 
   * 1 - off
   *0 - on
@@ -131,5 +135,6 @@
 
 void LED_GPIO_Config(void);
 void Movestep(void);
+void ESP8266_Rst ( void );
 
 #endif /* __LED_H */
