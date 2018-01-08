@@ -100,22 +100,22 @@ void Movestep(void)
 	/* 00 */
 	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
-	Delay_ms(5);
+	Delay_ms(500);
 
 	/* 01 */
 	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
 	GPIO_SetBits(GPIOA, GPIO_Pin_3);
-	Delay_ms(5);
+	Delay_ms(500);
 
 	/* 11 */
 	GPIO_SetBits(GPIOA, GPIO_Pin_2);
 	GPIO_SetBits(GPIOA, GPIO_Pin_3);
-	Delay_ms(5);
+	Delay_ms(500);
 
 	/* 10 */
 	GPIO_SetBits(GPIOA, GPIO_Pin_2);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
-	Delay_ms(5);
+	Delay_ms(500);
 
 	/* ¹Ø±Õµç»ú */
 	GPIO_ResetBits(GPIOA, GPIO_Pin_4);	

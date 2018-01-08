@@ -14,7 +14,7 @@ void SetWifiConnect(void);
 void SetIP(char *pReIP);
 
 char ipstr[100] = {0};
-char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
+char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.80.108\",8080";
 void SetIP(char *pReIP)
 {
 	pReIP = pReIP + 3;
@@ -35,7 +35,7 @@ void SetWifiConnect(void)
 	ESP8266_Set("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP
   
 	for(i = 0; i < 5;i++)
-	ESP8266_Set("AT+CWJAP=\"A304\",\"wildfire\"");
+	ESP8266_Set("AT+CWJAP=\"ynao\",\"ynao246135\"");
 
 	for(i = 0; i < 3 ;i++)
 	ESP8266_Set("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
@@ -112,7 +112,7 @@ int main(void)
 				{
 					if (UART_RxBuffer[2] == '+')
 					{
-						for(i = 0; i < 2600; i++)
+						for(i = 0; i < 10; i++)
 						Movestep();
 						Stepcounter++;
 						sprintf ( cStr, "Moving %d is ok!\n", Stepcounter);
