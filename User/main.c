@@ -64,7 +64,7 @@ void SetWifiConnect(void)
   * @param  ÎÞ  
   * @retval ÎÞ
   */
-//:FW192.168.**.**#
+//:FW192.168.**.**#20Ï¸·Ö18¡ã
 extern bool bFlagRun;
 extern bool bRunMotor;
 u8 Stepcounter = 0;
@@ -112,7 +112,7 @@ int main(void)
 				{
 					if (UART_RxBuffer[2] == '+')
 					{
-						for(i = 0; i < 10; i++)
+						for(i = 0; i < 5; i++)
 						Movestep();
 						Stepcounter++;
 						sprintf ( cStr, "Moving %d is ok!\n", Stepcounter);
