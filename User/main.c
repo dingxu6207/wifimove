@@ -11,50 +11,42 @@
 
 
 void SetWifiConnect(void);
-void SetIP(char *pReIP);
+void SetIP(unsigned char *pReIP);
+void CmdString(unsigned char *ptr);
 
-char ipstr[100] = {0};
-char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.80.108\",8080";
-void SetIP(char *pReIP)
+unsigned char ipstr[100] = {0};
+unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
+void SetIP(unsigned char *pReIP)
 {
 	pReIP = pReIP + 3;
-	sprintf ( ipstr, "\"%s\",\"%s\",%s", "TCP", pReIP, "8080" );
-	sprintf ( Cmdstr, "AT+CIPSTART=%s", ipstr );
+	sprintf ( (char*)ipstr, "\"%s\",\"%s\",%s", "TCP", pReIP, "8080" );
+	sprintf ( (char*)Cmdstr, "AT+CIPSTART=%s", ipstr );
 	printf("ip is ok!\n");
 }
 
 void SetWifiConnect(void)
-{ 	int i;
+{ 
 
-	ESP8266_Rst();
-	
-	for(i = 0; i < 3 ;i++)
-	ESP8266_Set("AT+RST"); //测试
- 
-	for(i = 0; i < 3 ;i++)
-	ESP8266_Set("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP
+	   ESP8266_Rst();
+		 CmdString("AT+RST"); //测试
+		 CmdString("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP	
+		 CmdString("AT+CWJAP=\"A304\",\"wildfire\"");	
+		 CmdString("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
+		 CmdString(Cmdstr);
+		 CmdString("AT+CIPMODE=1");//透传模式	
+		 CmdString("AT+CIPSEND");//检测是否连接成功
+
+}
   
-	for(i = 0; i < 5;i++)
-	ESP8266_Set("AT+CWJAP=\"ynao\",\"ynao246135\"");
-
+void CmdString(unsigned char *ptr)
+{
+	int i;		
 	for(i = 0; i < 3 ;i++)
-	ESP8266_Set("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
-	
-	for(i = 0; i < 5 ;i++)
-	//ESP8266_Set("AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080");  //启动TCP/IP 端口为8080 实现基于网络//控制
-	ESP8266_Set(Cmdstr);
-	
-	for(i = 0; i < 3 ;i++)
-  	ESP8266_Set("AT+CIPMODE=1");//透传模式
-
-	for(i = 0; i < 3 ;i++)
-	ESP8266_Set("AT+CIPSEND");//检测是否连接成功
-  
-	Delay_ms(1000);
-	if (strstr(UART_RxBuffer, "OK"))
 	{
-		  uart_FlushRxBuffer();
-		  printf("set wifi is ok!\n");
+			uart_FlushRxBuffer();
+			ESP8266_Set(ptr);//检测是否连接成功
+			if (strstr((char*)UART_RxBuffer, "OK"))
+				break;
 	}
 }
 
@@ -85,7 +77,7 @@ int main(void)
 	
 	//SetWifiConnect();
 	bFlagRun = true;
-	sprintf(CmdUART_RxBuffer, ":FY#");
+	sprintf((char*)CmdUART_RxBuffer, ":FY#");
 	while(1)
 	{		
 		if (bFlagRun == true)
@@ -113,7 +105,7 @@ int main(void)
 					if (UART_RxBuffer[2] == '+')
 					{
 						for(i = 0; i < 5; i++)
-						Movestep();
+						//Movestep();
 						Stepcounter++;
 						sprintf ( cStr, "Moving %d is ok!\n", Stepcounter);
 			  			WifiUsart_SendString(USART3, cStr);

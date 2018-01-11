@@ -2,7 +2,7 @@
 
 
  //串口接收数组
-char UART_RxBuffer[UART_RX_BUFFER_SIZE];
+unsigned char UART_RxBuffer[UART_RX_BUFFER_SIZE];
  
  //串口接收数组指针
  unsigned char UART_RxPtr;

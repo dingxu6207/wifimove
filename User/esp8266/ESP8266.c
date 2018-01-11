@@ -21,7 +21,7 @@ void ESP8266_Set(unsigned char *puf) // 数组指针*puf指向字符串数组
       
 	  WifiUsart_SendByte(USART3, '\n');
       Usart_SendByte(USART1, '\n');
-      Delay_ms(1000);
+      Delay_ms(2000);
 }
 
 

@@ -123,12 +123,10 @@ void Movestep(void)
 
 void ESP8266_Rst ( void )
 {
-
-	 macESP8266_RST_LOW_LEVEL();
-	 Delay_ms ( 500 ); 
-	 macESP8266_RST_HIGH_LEVEL();
-
-
+   
+		macESP8266_RST_LOW_LEVEL();
+		Delay_ms ( 500 ); 
+		macESP8266_RST_HIGH_LEVEL();
 }
 
 /*********************************************END OF FILE**********************/

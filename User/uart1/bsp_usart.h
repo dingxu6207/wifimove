@@ -10,7 +10,7 @@
 #define CmdUART_RX_BUFFER_SIZE 256
 
  //串口接收数组
-extern char CmdUART_RxBuffer[CmdUART_RX_BUFFER_SIZE];
+extern unsigned char CmdUART_RxBuffer[CmdUART_RX_BUFFER_SIZE];
  
  //串口接收数组指针
 extern unsigned char CmdUART_RxPtr;

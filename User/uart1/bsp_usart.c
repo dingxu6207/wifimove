@@ -19,7 +19,7 @@
 
 
   //串口接收数组
- char CmdUART_RxBuffer[CmdUART_RX_BUFFER_SIZE];
+ unsigned char CmdUART_RxBuffer[CmdUART_RX_BUFFER_SIZE];
   
   //串口接收数组指针
  unsigned char CmdUART_RxPtr;
