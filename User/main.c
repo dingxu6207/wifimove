@@ -28,13 +28,16 @@ void SetWifiConnect(void)
 { 
 
 	   ESP8266_Rst();
+		 CmdString("AT"); //测试
 		 CmdString("AT+RST"); //测试
+		
 		 CmdString("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP	
 		 CmdString("AT+CWJAP=\"A304\",\"wildfire\"");	
 		 CmdString("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
 		 CmdString(Cmdstr);
 		 CmdString("AT+CIPMODE=1");//透传模式	
 		 CmdString("AT+CIPSEND");//检测是否连接成功
+	   uart_FlushRxBuffer();
 
 }
   
@@ -44,7 +47,7 @@ void CmdString(unsigned char *ptr)
 	for(i = 0; i < 3 ;i++)
 	{
 			uart_FlushRxBuffer();
-			ESP8266_Set(ptr);//检测是否连接成功
+			ESP8266_Set(ptr);
 			if (strstr((char*)UART_RxBuffer, "OK"))
 				break;
 	}

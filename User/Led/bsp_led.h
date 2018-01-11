@@ -37,8 +37,8 @@
 #define IN2_GPIO_PIN		  GPIO_Pin_3			        /* 连接到SCL时钟线的GPIO */
 
 
-#define     macESP8266_RST_HIGH_LEVEL()        GPIO_SetBits ( LED1_GPIO_PORT, LED1_GPIO_PIN )
-#define     macESP8266_RST_LOW_LEVEL()         GPIO_ResetBits ( LED1_GPIO_PORT, LED1_GPIO_PIN )
+#define     macESP8266_RST_HIGH_LEVEL()        GPIO_SetBits ( LED2_GPIO_PORT, LED2_GPIO_PIN )
+#define     macESP8266_RST_LOW_LEVEL()         GPIO_ResetBits ( LED2_GPIO_PORT, LED2_GPIO_PIN )
 
 /** the macro definition to trigger the led on or off 
   * 1 - off
