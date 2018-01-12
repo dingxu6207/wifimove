@@ -13,6 +13,9 @@
 void SetWifiConnect(void);
 void SetIP(unsigned char *pReIP);
 void CmdString(unsigned char *ptr);
+void SetWifiName(unsigned char *pReName);
+void SetNameCode(void);
+
 
 unsigned char ipstr[100] = {0};
 unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
@@ -24,6 +27,29 @@ void SetIP(unsigned char *pReIP)
 	printf("ip is ok!\n");
 }
 
+
+unsigned char NameStr[100] = "\"A305\"";
+void SetWifiName(unsigned char *pReName)
+{
+	pReName = pReName + 3;
+	sprintf((char *)NameStr, "\"%s\"", pReName);
+	printf("set wifi name is ok!\n");
+}
+
+unsigned char CodeString[100] = "\"wildfired\"";
+void SetCode(unsigned char *pReCode)
+{
+	pReCode = pReCode + 3;
+	sprintf((char *)CodeString, "\"%s\"", pReCode);
+	printf("set code is ok!\n");
+}
+
+unsigned char CmdNameCode[100] = "AT+CWJAP=\"A304\",\"wildfire\"";
+void SetNameCode(void)
+{
+	sprintf((char *)CmdNameCode, "AT+CWJAP=%s,%s", NameStr, CodeString);
+}
+
 void SetWifiConnect(void)
 { 
 
@@ -32,7 +58,8 @@ void SetWifiConnect(void)
 		 CmdString("AT+RST"); //测试
 		
 		 CmdString("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP	
-		 CmdString("AT+CWJAP=\"A304\",\"wildfire\"");	
+		 //CmdString("AT+CWJAP=\"A304\",\"wildfire\"");
+		 CmdString(CmdNameCode);
 		 CmdString("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
 		 CmdString(Cmdstr);
 		 CmdString("AT+CIPMODE=1");//透传模式	
@@ -93,8 +120,24 @@ int main(void)
 							CmdUART_RxBuffer[CmdUART_RxPtr - 1] = '\0';							
 							SetIP(CmdUART_RxBuffer);
 						}
+						else if (CmdUART_RxBuffer[2] == 'A')
+						{
+							CmdUART_RxBuffer[CmdUART_RxPtr - 1] = '\0';	
+							SetWifiName(CmdUART_RxBuffer);
+						}
+						else if (CmdUART_RxBuffer[2] == 'C')
+						{
+							CmdUART_RxBuffer[CmdUART_RxPtr - 1] = '\0';	
+							SetCode(CmdUART_RxBuffer);
+						}
+							
 						else if (CmdUART_RxBuffer[2] == 'Y')
+						{
+							SetNameCode();
 							SetWifiConnect();	
+						}
+							
+								
 				  	}	
 			bFlagRun = false;
 			CmdUsart_FlushRxBuffer();
