@@ -138,7 +138,7 @@ void WifiUsart_SendHalfWord( USART_TypeDef * pUSARTx, uint16_t ch)
 
 
 //Çå¿Õ·¢ËÍ»º³å
-void uart_FlushRxBuffer(void)
+void Wifiuart_FlushRxBuffer(void)
 {
   UART_RxPtr = 0;
   UART_RxBuffer[UART_RxPtr] = 0;

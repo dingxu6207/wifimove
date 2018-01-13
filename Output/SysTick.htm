@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\..\Output\SysTick.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\..\Output\SysTick.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5040049: Last Updated: Fri Jan 12 23:20:15 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5040049: Last Updated: Sat Jan 13 08:53:34 2018
 <BR><P>
 <H3>Maximum Stack Usage =        196 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -611,7 +611,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = CmdString &rArr; ESP8266_Set &rArr; WifiUsart_SendByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_FlushRxBuffer
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Wifiuart_FlushRxBuffer
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266_Set
 </UL>
 <BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetWifiConnect
@@ -620,7 +620,7 @@ Global Symbols
 <P><STRONG><a name="[62]"></a>SetWifiConnect</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SetWifiConnect &rArr; CmdString &rArr; ESP8266_Set &rArr; WifiUsart_SendByte
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_FlushRxBuffer
+<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Wifiuart_FlushRxBuffer
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ESP8266_Rst
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CmdString
 </UL>
@@ -633,7 +633,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_FlushRxBuffer
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Wifiuart_FlushRxBuffer
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiUsart_SendString
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiUSART_Config
 <LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Config
@@ -857,7 +857,7 @@ Global Symbols
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_SendData
 </UL>
 
-<P><STRONG><a name="[5f]"></a>uart_FlushRxBuffer</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, wifiusart..o(.text))
+<P><STRONG><a name="[5f]"></a>Wifiuart_FlushRxBuffer</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, wifiusart..o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetWifiConnect
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CmdString

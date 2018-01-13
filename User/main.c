@@ -64,7 +64,7 @@ void SetWifiConnect(void)
 		 CmdString(Cmdstr);
 		 CmdString("AT+CIPMODE=1");//透传模式	
 		 CmdString("AT+CIPSEND");//检测是否连接成功
-	   uart_FlushRxBuffer();
+	   Wifiuart_FlushRxBuffer();
 
 }
   
@@ -73,7 +73,7 @@ void CmdString(unsigned char *ptr)
 	int i;		
 	for(i = 0; i < 3 ;i++)
 	{
-			uart_FlushRxBuffer();
+			Wifiuart_FlushRxBuffer();
 			ESP8266_Set(ptr);
 			if (strstr((char*)UART_RxBuffer, "OK"))
 				break;
@@ -160,7 +160,7 @@ int main(void)
 						GPIO_ResetBits(GPIOA, GPIO_Pin_4);					
 				}
 			  
-			  uart_FlushRxBuffer();
+			  Wifiuart_FlushRxBuffer();
 			  bRunMotor =false;
 			  
 		}		
