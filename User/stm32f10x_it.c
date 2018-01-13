@@ -157,7 +157,7 @@ void DEBUG_USART_IRQHandler(void)
         }
 		else
         {
-                CmdUART_RxBuffer[UART_RxPtr - 1] = ucTemp;
+                CmdUART_RxBuffer[CmdUART_RxPtr - 1] = ucTemp;
                 
         }
 
@@ -182,15 +182,15 @@ void DEBUG_USART3_IRQHandler(void)
     
 			data = USART_ReceiveData(DEBUG_USART3x);
 		
-    	if(UART_RxPtr < (UART_RX_BUFFER_SIZE - 1))
+    	if(WIFIUART_RxPtr < (WIFIUART_RX_BUFFER_SIZE - 1))
         {
-                UART_RxBuffer[UART_RxPtr] = data;
-                UART_RxBuffer[UART_RxPtr + 1]=0x00;
-                UART_RxPtr++;
+                WIFIUART_RxBuffer[WIFIUART_RxPtr] = data;
+                WIFIUART_RxBuffer[WIFIUART_RxPtr + 1]=0x00;
+                WIFIUART_RxPtr++;
         }
 			else
         {
-                UART_RxBuffer[UART_RxPtr - 1] = data;
+                WIFIUART_RxBuffer[WIFIUART_RxPtr - 1] = data;
                 
         }
 

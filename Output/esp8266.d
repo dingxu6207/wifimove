@@ -30,6 +30,8 @@
 ..\..\output\esp8266.o: ..\..\Libraries\FWlib\inc\stm32f10x_wwdg.h
 ..\..\output\esp8266.o: ..\..\Libraries\FWlib\inc\misc.h
 ..\..\output\esp8266.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\..\output\esp8266.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
 ..\..\output\esp8266.o: ..\..\User\uart3\WifiUsart.h
 ..\..\output\esp8266.o: ..\..\User\SysTick\bsp_SysTick.h
 ..\..\output\esp8266.o: ..\..\User\uart1\bsp_usart.h
+..\..\output\esp8266.o: ..\..\User\Led\bsp_led.h

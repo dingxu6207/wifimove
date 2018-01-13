@@ -9,17 +9,17 @@
 // R-红色
 #define LED1_GPIO_PORT    	GPIOB			              /* GPIO端口 */
 #define LED1_GPIO_CLK 	    RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
-#define LED1_GPIO_PIN		GPIO_Pin_5			        /* 连接到SCL时钟线的GPIO */
+#define LED1_GPIO_PIN		GPIO_Pin_12			        /* 连接到SCL时钟线的GPIO */
 
 // G-绿色
 #define LED2_GPIO_PORT    	GPIOB			              /* GPIO端口 */
 #define LED2_GPIO_CLK 	    RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
-#define LED2_GPIO_PIN				GPIO_Pin_4		        /* 连接到SCL时钟线的GPIO */
+#define LED2_GPIO_PIN		GPIO_Pin_13	        /* 连接到SCL时钟线的GPIO */
 
 // B-蓝色
 #define LED3_GPIO_PORT    	GPIOB			              /* GPIO端口 */
 #define LED3_GPIO_CLK 	    RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
-#define LED3_GPIO_PIN		GPIO_Pin_1			        /* 连接到SCL时钟线的GPIO */
+#define LED3_GPIO_PIN		GPIO_Pin_14		        /* 连接到SCL时钟线的GPIO */
 
 //EN引脚
 #define EN_GPIO_PORT    	GPIOA			              /* GPIO端口 */
@@ -37,8 +37,7 @@
 #define IN2_GPIO_PIN		  GPIO_Pin_3			        /* 连接到SCL时钟线的GPIO */
 
 
-#define     macESP8266_RST_HIGH_LEVEL()        GPIO_SetBits ( LED2_GPIO_PORT, LED2_GPIO_PIN )
-#define     macESP8266_RST_LOW_LEVEL()         GPIO_ResetBits ( LED2_GPIO_PORT, LED2_GPIO_PIN )
+
 
 /** the macro definition to trigger the led on or off 
   * 1 - off

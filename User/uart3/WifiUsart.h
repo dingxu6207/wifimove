@@ -5,9 +5,9 @@
 #include <stdio.h>
 
 //串口接收缓冲数组大小
-#define UART_RX_BUFFER_SIZE 1024
-extern unsigned char UART_RxBuffer[UART_RX_BUFFER_SIZE];
-extern unsigned char UART_RxPtr;
+#define WIFIUART_RX_BUFFER_SIZE 1024
+extern unsigned char WIFIUART_RxBuffer[WIFIUART_RX_BUFFER_SIZE];
+extern unsigned char WIFIUART_RxPtr;
 
 // 串口3-USART3
 #define  DEBUG_USART3x                   USART3

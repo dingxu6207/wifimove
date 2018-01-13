@@ -25,11 +25,11 @@
   */
 void LED_GPIO_Config(void)
 {		
-		/*定义一个GPIO_InitTypeDef类型的结构体*/
-		GPIO_InitTypeDef GPIO_InitStructure;
+	  /*定义一个GPIO_InitTypeDef类型的结构体*/
+	  GPIO_InitTypeDef GPIO_InitStructure;
 	  
 	  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE); 
-    GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+      GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
 		/*开启LED相关的GPIO外设时钟*/
 		RCC_APB2PeriphClockCmd( LED1_GPIO_CLK | LED2_GPIO_CLK | LED3_GPIO_CLK, ENABLE);
@@ -124,12 +124,6 @@ void Movestep(void)
 	GPIO_ResetBits(GPIOA, GPIO_Pin_4);	
 }
 
-void ESP8266_Rst ( void )
-{
-   
-		macESP8266_RST_LOW_LEVEL();
-		Delay_ms ( 500 ); 
-		macESP8266_RST_HIGH_LEVEL();
-}
+
 
 /*********************************************END OF FILE**********************/

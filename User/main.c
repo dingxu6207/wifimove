@@ -1,4 +1,4 @@
-#include "stm32f10x.h"
+ #include "stm32f10x.h"
 #include "bsp_SysTick.h"
 #include "bsp_led.h"
 #include "bsp_usart.h"
@@ -8,77 +8,6 @@
 #include <string.h>  
 #include <stdbool.h>
 #include "stm32f10x_it.h"
-
-
-void SetWifiConnect(void);
-void SetIP(unsigned char *pReIP);
-void CmdString(unsigned char *ptr);
-void SetWifiName(unsigned char *pReName);
-void SetNameCode(void);
-
-
-unsigned char ipstr[100] = {0};
-unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
-void SetIP(unsigned char *pReIP)
-{
-	pReIP = pReIP + 3;
-	sprintf ( (char*)ipstr, "\"%s\",\"%s\",%s", "TCP", pReIP, "8080" );
-	sprintf ( (char*)Cmdstr, "AT+CIPSTART=%s", ipstr );
-	printf("ip is ok!\n");
-}
-
-
-unsigned char NameStr[100] = "\"A305\"";
-void SetWifiName(unsigned char *pReName)
-{
-	pReName = pReName + 3;
-	sprintf((char *)NameStr, "\"%s\"", pReName);
-	printf("set wifi name is ok!\n");
-}
-
-unsigned char CodeString[100] = "\"wildfired\"";
-void SetCode(unsigned char *pReCode)
-{
-	pReCode = pReCode + 3;
-	sprintf((char *)CodeString, "\"%s\"", pReCode);
-	printf("set code is ok!\n");
-}
-
-unsigned char CmdNameCode[100] = "AT+CWJAP=\"A304\",\"wildfire\"";
-void SetNameCode(void)
-{
-	sprintf((char *)CmdNameCode, "AT+CWJAP=%s,%s", NameStr, CodeString);
-}
-
-void SetWifiConnect(void)
-{ 
-
-	   ESP8266_Rst();
-		 CmdString("AT"); //测试
-		 CmdString("AT+RST"); //测试
-		
-		 CmdString("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP	
-		 //CmdString("AT+CWJAP=\"A304\",\"wildfire\"");
-		 CmdString(CmdNameCode);
-		 CmdString("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
-		 CmdString(Cmdstr);
-		 CmdString("AT+CIPMODE=1");//透传模式	
-		 CmdString("AT+CIPSEND");//检测是否连接成功
-	   Wifiuart_FlushRxBuffer();
-
-}
-  
-void CmdString(unsigned char *ptr)
-{
-	int i;		
-	for(i = 0; i < 3 ;i++)
-	{
-			Wifiuart_FlushRxBuffer();
-			ESP8266_Set(ptr);
-			if (strstr((char*)UART_RxBuffer, "OK"))
-				break;
-	}
-}
 
 
 /**
@@ -96,7 +25,9 @@ int main(void)
 	char cStr [ 100 ] = { 0 };
 	int i;
 	/* LED 端口初始化 */
-	LED_GPIO_Config();
+	//LED_GPIO_Config();
+
+	ESP8266IO();
 
 	/* 配置SysTick 为10us中断一次 */
 	SysTick_Init();
@@ -128,7 +59,7 @@ int main(void)
 						else if (CmdUART_RxBuffer[2] == 'C')
 						{
 							CmdUART_RxBuffer[CmdUART_RxPtr - 1] = '\0';	
-							SetCode(CmdUART_RxBuffer);
+							SetWifiCode(CmdUART_RxBuffer);
 						}
 							
 						else if (CmdUART_RxBuffer[2] == 'Y')
@@ -145,10 +76,10 @@ int main(void)
 
 		if (bRunMotor == true)		
 		{   
-			if (UART_RxBuffer[0] == ':')
-				if (UART_RxBuffer[1] == 'F')
+			if (WIFIUART_RxBuffer[0] == ':')
+				if (WIFIUART_RxBuffer[1] == 'F')
 				{
-					if (UART_RxBuffer[2] == '+')
+					if (WIFIUART_RxBuffer[2] == '+')
 					{
 						for(i = 0; i < 5; i++)
 						//Movestep();
@@ -156,7 +87,7 @@ int main(void)
 						sprintf ( cStr, "Moving %d is ok!\n", Stepcounter);
 			  			WifiUsart_SendString(USART3, cStr);
 					}
-					else if(UART_RxBuffer[2] == 'Q')
+					else if(WIFIUART_RxBuffer[2] == 'Q')
 						GPIO_ResetBits(GPIOA, GPIO_Pin_4);					
 				}
 			  

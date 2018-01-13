@@ -2,10 +2,10 @@
 
 
  //串口接收数组
-unsigned char UART_RxBuffer[UART_RX_BUFFER_SIZE];
+unsigned char WIFIUART_RxBuffer[WIFIUART_RX_BUFFER_SIZE];
  
  //串口接收数组指针
- unsigned char UART_RxPtr;
+ unsigned char WIFIUART_RxPtr;
 
 
  /**
@@ -140,7 +140,7 @@ void WifiUsart_SendHalfWord( USART_TypeDef * pUSARTx, uint16_t ch)
 //清空发送缓冲
 void Wifiuart_FlushRxBuffer(void)
 {
-  UART_RxPtr = 0;
-  UART_RxBuffer[UART_RxPtr] = 0;
+  WIFIUART_RxPtr = 0;
+  WIFIUART_RxBuffer[WIFIUART_RxPtr] = 0;
 }
 
