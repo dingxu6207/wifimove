@@ -89,15 +89,17 @@ int main(void)
 					if (WIFIUART_RxBuffer[2] == '+')
 					{
                         uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);
+												uCmdStep = uCmdStep + 1;
 						while(1)
 						{
 							bRdeter = Movestep(SetTime, uCmdStep);
 							if(bRdeter)
 								break;
 						}
-												
+							
+						Stepcounter = Stepcounter - 1;
 						sprintf ( cStr, ":F+%d#\n", Stepcounter);
-			  			WifiUsart_SendString(USART3, cStr);
+			  		WifiUsart_SendString(USART3, cStr);
 						
 					}
 					else if(WIFIUART_RxBuffer[2] == 'V')
