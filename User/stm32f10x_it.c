@@ -157,7 +157,7 @@ void DEBUG_USART_IRQHandler(void)
         }
 		else
         {
-                CmdUART_RxBuffer[CmdUART_RxPtr - 1] = ucTemp;
+                CmdUART_RxBuffer[CmdUART_RxPtr  - 1] = ucTemp;
                 
         }
 

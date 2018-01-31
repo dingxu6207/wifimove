@@ -29,6 +29,7 @@
 ..\..\output\bsp_led.o: ..\..\Libraries\FWlib\inc\stm32f10x_usart.h
 ..\..\output\bsp_led.o: ..\..\Libraries\FWlib\inc\stm32f10x_wwdg.h
 ..\..\output\bsp_led.o: ..\..\Libraries\FWlib\inc\misc.h
+..\..\output\bsp_led.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
 ..\..\output\bsp_led.o: ..\..\User\SysTick\bsp_SysTick.h
 ..\..\output\bsp_led.o: ..\..\User\uart1\bsp_usart.h
 ..\..\output\bsp_led.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h

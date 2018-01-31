@@ -28,32 +28,32 @@ void ESP8266_Set(unsigned char *puf) // 数组指针*puf指向字符串数组
 
 
 unsigned char ipstr[100] = {0};
-unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
+unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.1.3\",8080";
 void SetIP(unsigned char *pReIP)
 {
 	pReIP = pReIP + 3;
 	sprintf ( (char*)ipstr, "\"%s\",\"%s\",%s", "TCP", pReIP, "8080" );
 	sprintf ( (char*)Cmdstr, "AT+CIPSTART=%s", ipstr );
-	printf("ip is ok!\n");
+	printf("ip %s is ok!\n", ipstr);
 }
 
-unsigned char NameStr[100] = "\"A305\"";
+unsigned char NameStr[100] = "\"dx405\"";
 void SetWifiName(unsigned char *pReName)
 {
 	pReName = pReName + 3;
 	sprintf((char *)NameStr, "\"%s\"", pReName);
-	printf("set wifi name is ok!\n");
+	printf("set wifi name %s is ok!\n", pReName);
 }
 
-unsigned char CodeString[100] = "\"wildfired\"";
+unsigned char CodeString[100] = "\"xingdu405\"";
 void SetWifiCode(unsigned char *pReCode)
 {
 	pReCode = pReCode + 3;
 	sprintf((char *)CodeString, "\"%s\"", pReCode);
-	printf("set code is ok!\n");
+	printf("set code %s is ok!\n", CodeString);
 }
 
-unsigned char CmdNameCode[100] = "AT+CWJAP=\"A304\",\"wildfire\"";
+unsigned char CmdNameCode[100] = "AT+CWJAP=\"dx405\",\"xingdu405\"";
 void SetNameCode(void)
 {
 	sprintf((char *)CmdNameCode, "AT+CWJAP=%s,%s", NameStr, CodeString);

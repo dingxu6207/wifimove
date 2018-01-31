@@ -3,7 +3,7 @@
 
 
 #include "stm32f10x.h"
-
+#include <stdbool.h>
 
 /* 定义LED连接的GPIO端口, 用户只需要修改下面的代码即可改变控制的LED引脚 */
 // R-红色
@@ -133,7 +133,13 @@
 					LED3_OFF
 
 void LED_GPIO_Config(void);
-void Movestep(void);
+bool Movestep(uc16 TimeMs, u16 uReCmdStep);
 void ESP8266_Rst ( void );
+
+bool DetermineBreak(u16 uDReCmdStep);
+
+
+
+extern u16 Stepcounter;
 
 #endif /* __LED_H */

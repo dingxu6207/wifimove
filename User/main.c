@@ -8,7 +8,7 @@
 #include <string.h>  
 #include <stdbool.h>
 #include "stm32f10x_it.h"
-
+#include <stdlib.h>
 
 /**
   * @brief  主函数
@@ -18,27 +18,34 @@
 //:FW192.168.**.**#20细分18°
 extern bool bFlagRun;
 extern bool bRunMotor;
-u8 Stepcounter = 0;
+u16 uCmdStep = 0;
 int main(void)
 {	
-
+    bool bRdeter = false;
 	char cStr [ 100 ] = { 0 };
-	int i;
+	char cTimeStr [100] = {0};
+
+
+	u16 SetTime = 50;
+	
 	/* LED 端口初始化 */
-	//LED_GPIO_Config();
+	LED_GPIO_Config();
 
 	ESP8266IO();
 
-	/* 配置SysTick 为10us中断一次 */
+	/* 配置SysTick 为1us中断一次 */
 	SysTick_Init();
 
 	USART_Config();
 	
 	WifiUSART_Config();
 	
-	//SetWifiConnect();
+	
 	bFlagRun = true;
 	sprintf((char*)CmdUART_RxBuffer, ":FY#");
+	
+	
+							
 	while(1)
 	{		
 		if (bFlagRun == true)
@@ -81,14 +88,25 @@ int main(void)
 				{
 					if (WIFIUART_RxBuffer[2] == '+')
 					{
-						for(i = 0; i < 5; i++)
-						//Movestep();
-						Stepcounter++;
-						sprintf ( cStr, "Moving %d is ok!\n", Stepcounter);
+                        uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);
+						while(1)
+						{
+							bRdeter = Movestep(SetTime, uCmdStep);
+							if(bRdeter)
+								break;
+						}
+												
+						sprintf ( cStr, ":F+%d#\n", Stepcounter);
 			  			WifiUsart_SendString(USART3, cStr);
+						
 					}
-					else if(WIFIUART_RxBuffer[2] == 'Q')
-						GPIO_ResetBits(GPIOA, GPIO_Pin_4);					
+					else if(WIFIUART_RxBuffer[2] == 'V')
+					{
+							SetTime = atoi((char const *)WIFIUART_RxBuffer + 3);
+						sprintf(cTimeStr, ":FV%d#\n", SetTime);
+							WifiUsart_SendString(USART3, cTimeStr);
+					}
+						
 				}
 			  
 			  Wifiuart_FlushRxBuffer();

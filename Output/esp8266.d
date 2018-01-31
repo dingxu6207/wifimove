@@ -35,3 +35,4 @@
 ..\..\output\esp8266.o: ..\..\User\SysTick\bsp_SysTick.h
 ..\..\output\esp8266.o: ..\..\User\uart1\bsp_usart.h
 ..\..\output\esp8266.o: ..\..\User\Led\bsp_led.h
+..\..\output\esp8266.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
