@@ -77,12 +77,17 @@ bool DetermineBreak(u16 uDReCmdStep)
 {
     bool bturn = false;
 	
-    Stepcounter++;
+    
 	if (Stepcounter >= uDReCmdStep)
+	{
+		
 		bturn = true;
+	}		
 	else
+	{
+	    Stepcounter++;
 		bturn = false;
-	
+	}	
 	return bturn;
 		
 }
