@@ -134,9 +134,14 @@
 
 void LED_GPIO_Config(void);
 bool Movestep(uc16 TimeMs, u16 uReCmdStep);
+bool MovestepL(uc16 TimeMs, u16 uReCmdStep);
+
 void ESP8266_Rst ( void );
 
 bool DetermineBreak(u16 uDReCmdStep);
+bool DetermineBreakL(u16 uDReCmdStep);
+void initalMoveR(void);
+void initalMoveL(void);
 
 
 

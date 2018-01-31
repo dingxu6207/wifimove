@@ -88,21 +88,44 @@ int main(void)
 				{
 					if (WIFIUART_RxBuffer[2] == '+')
 					{
-                        uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);
-												uCmdStep = uCmdStep + 1;
+					    /* 开启电机 */
+						GPIO_SetBits(EN_GPIO_PORT, EN_GPIO_PIN);
+						initalMoveR();
+						
+                        uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);												
 						while(1)
 						{
 							bRdeter = Movestep(SetTime, uCmdStep);
 							if(bRdeter)
 								break;
 						}
-							
-						Stepcounter = Stepcounter - 1;
-						sprintf ( cStr, ":F+%d#\n", Stepcounter);
-			  		WifiUsart_SendString(USART3, cStr);
+						/* 关闭电机 */
+						GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);	
+						
+						sprintf ( cStr, ":FS%d#\n", Stepcounter);
+			  			WifiUsart_SendString(USART3, cStr);
 						
 					}
-					else if(WIFIUART_RxBuffer[2] == 'V')
+					else if (WIFIUART_RxBuffer[2] == '-')
+					{
+						/* 开启电机 */
+						GPIO_SetBits(EN_GPIO_PORT, EN_GPIO_PIN);
+						initalMoveL();
+						
+						uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);								
+						while(1)
+						{
+							bRdeter = MovestepL(SetTime, uCmdStep);
+							if(bRdeter)
+								break;
+						}
+                        /* 关闭电机 */
+						GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);
+						
+						sprintf ( cStr, ":FS%d#\n", Stepcounter);
+			  			WifiUsart_SendString(USART3, cStr);
+					}
+					else if (WIFIUART_RxBuffer[2] == 'V')
 					{
 							SetTime = atoi((char const *)WIFIUART_RxBuffer + 3);
 						sprintf(cTimeStr, ":FV%d#\n", SetTime);

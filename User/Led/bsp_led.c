@@ -146,6 +146,87 @@ bool Movestep(uc16 TimeMs, u16 uReCmdStep)
 	return bBreakCount;
 }
 
+bool DetermineBreakL(u16 uDReCmdStep)
+{
+    bool bturn = false;
+	
+    
+	if (Stepcounter <= uDReCmdStep)
+	{
+		
+		bturn = true;
+	}		
+	else
+	{
+	    Stepcounter--;
+		bturn = false;
+	}	
+	return bturn;
+		
+}
 
+//-------------------------------------------
+//·´×ª
+bool MovestepL(uc16 TimeMs, u16 uReCmdStep)
+{
+	bool bBreakCount = false;
+		
+	/* 10 */
+	GPIO_SetBits(GPIOA, GPIO_Pin_2);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
+	Delay_ms(TimeMs);
+	if (DetermineBreakL(uReCmdStep))
+	{
+		bBreakCount = true;
+		return bBreakCount;
+	}
+
+	/* 11 */
+	GPIO_SetBits(GPIOA, GPIO_Pin_2);
+	GPIO_SetBits(GPIOA, GPIO_Pin_3);
+	Delay_ms(TimeMs);
+	if (DetermineBreakL(uReCmdStep))
+	{
+		bBreakCount = true;
+		return bBreakCount;
+	}
+
+    /* 01 */
+	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
+	GPIO_SetBits(GPIOA, GPIO_Pin_3);
+	Delay_ms(TimeMs);
+	if (DetermineBreakL(uReCmdStep))
+	{
+		bBreakCount = true;
+		return bBreakCount;
+	}
+
+	/* 00 */
+	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
+	Delay_ms(TimeMs);
+	
+	if (DetermineBreakL(uReCmdStep))
+	{
+		bBreakCount = true;
+		return bBreakCount;
+	}
+		
+	return bBreakCount;
+}
+
+void initalMoveR(void)
+{
+	GPIO_SetBits(GPIOA, GPIO_Pin_2);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
+	Delay_ms(200);
+}
+
+void initalMoveL(void)
+{
+	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
+	Delay_ms(200);
+}
 
 /*********************************************END OF FILE**********************/
