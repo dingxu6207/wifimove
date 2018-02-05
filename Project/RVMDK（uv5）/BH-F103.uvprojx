@@ -361,7 +361,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Led;..\..\User\SysTick;..\..\User\esp8266;..\..\User\uart1;..\..\User\uart3</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Led;..\..\User\SysTick;..\..\User\esp8266;..\..\User\uart1;..\..\User\uart3;..\..\User\exti</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -608,6 +608,11 @@
               <FileName>WifiUsart..c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\uart3\WifiUsart..c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\exti\bsp_exti.c</FilePath>
             </File>
           </Files>
         </Group>

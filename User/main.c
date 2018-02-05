@@ -26,7 +26,7 @@ int main(void)
 	char cTimeStr [100] = {0};
 
 
-	u16 SetTime = 50;
+	u16 SetTime = 10;
 	
 	/* LED ¶Ë¿Ú³õÊ¼»¯ */
 	LED_GPIO_Config();
