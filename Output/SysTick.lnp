@@ -32,6 +32,7 @@
 "..\..\output\esp8266.o"
 "..\..\output\bsp_usart.o"
 "..\..\output\wifiusart..o"
+"..\..\output\bsp_exti.o"
 --library_type=microlib --strict --scatter "..\..\Output\SysTick.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

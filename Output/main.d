@@ -38,3 +38,4 @@
 ..\..\output\main.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
 ..\..\output\main.o: ..\..\User\stm32f10x_it.h
 ..\..\output\main.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\..\output\main.o: ..\..\User\exti\bsp_exti.h

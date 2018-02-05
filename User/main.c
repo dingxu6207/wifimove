@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "stm32f10x_it.h"
 #include <stdlib.h>
-
+#include "bsp_exti.h"
 /**
   * @brief  主函数
   * @param  无  
@@ -40,14 +40,17 @@ int main(void)
 	
 	WifiUSART_Config();
 	
+	EXTI_Key_Config();
 	
 	bFlagRun = true;
 	sprintf((char*)CmdUART_RxBuffer, ":FY#");
 	
-	
-							
+	bRunMotor = true;
+								
 	while(1)
-	{		
+	{	
+		
+	
 		if (bFlagRun == true)
 		{
 			if (CmdUART_RxBuffer[0] == ':')
@@ -73,6 +76,8 @@ int main(void)
 						{
 							SetNameCode();
 							SetWifiConnect();	
+
+							sprintf((char*)WIFIUART_RxBuffer, "%s", ":F+725#");
 						}
 							
 								
@@ -83,15 +88,16 @@ int main(void)
 
 		if (bRunMotor == true)		
 		{   
+			
 			if (WIFIUART_RxBuffer[0] == ':')
 				if (WIFIUART_RxBuffer[1] == 'F')
-				{
+				{				
 					if (WIFIUART_RxBuffer[2] == '+')
-					{
-					    /* 开启电机 */
+					{					 
+					  initalMoveR();
+						/* 开启电机 */
 						GPIO_SetBits(EN_GPIO_PORT, EN_GPIO_PIN);
-						initalMoveR();
-						
+											
                         uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);												
 						while(1)
 						{
@@ -101,17 +107,24 @@ int main(void)
 						}
 						/* 关闭电机 */
 						GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);	
+
+						if (ExtiClear == true)
+						{
+							ExtiClear = false;
+							Stepcounter = 0;
+						}
 						
 						sprintf ( cStr, ":FS%d#\n", Stepcounter);
-			  			WifiUsart_SendString(USART3, cStr);
+			  		WifiUsart_SendString(USART3, cStr);
 						
 					}
 					else if (WIFIUART_RxBuffer[2] == '-')
 					{
+						
+						  initalMoveL();
 						/* 开启电机 */
 						GPIO_SetBits(EN_GPIO_PORT, EN_GPIO_PIN);
-						initalMoveL();
-						
+																	
 						uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);								
 						while(1)
 						{
@@ -121,6 +134,12 @@ int main(void)
 						}
                         /* 关闭电机 */
 						GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);
+
+						if (ExtiClear == true)
+						{
+							ExtiClear = false;
+							Stepcounter = 0;
+						}
 						
 						sprintf ( cStr, ":FS%d#\n", Stepcounter);
 			  			WifiUsart_SendString(USART3, cStr);

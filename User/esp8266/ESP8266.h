@@ -18,11 +18,11 @@ void ESP8266_Rst( void );
 
 #define Wirst_GPIO_PORT    	GPIOB			              /* GPIO端口 */
 #define Wirst_GPIO_CLK 	    RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
-#define Wirst_GPIO_PIN		GPIO_Pin_5			        /* 连接到SCL时钟线的GPIO */
+#define Wirst_GPIO_PIN		GPIO_Pin_9			        /* 连接到SCL时钟线的GPIO */
 
 #define Wien_GPIO_PORT    	GPIOB			              /* GPIO端口 */
 #define Wien_GPIO_CLK 	    RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
-#define Wien_GPIO_PIN		GPIO_Pin_4			        /* 连接到SCL时钟线的GPIO */
+#define Wien_GPIO_PIN		GPIO_Pin_8			        /* 连接到SCL时钟线的GPIO */
 
 
 #define     macESP8266_RST_HIGH_LEVEL()        GPIO_SetBits ( Wien_GPIO_PORT, Wien_GPIO_PIN )

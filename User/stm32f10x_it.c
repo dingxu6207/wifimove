@@ -201,6 +201,20 @@ void DEBUG_USART3_IRQHandler(void)
 	}	 
 }
 
+bool ExtiClear = false;
+void EXTI15_10_IRQHandler(void)
+{
+     if(EXTI_GetITStatus(EXTI_Line15) != RESET)
+     {
+		
+		GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);
+		
+		ExtiClear = true;
+	
+	    EXTI_ClearITPendingBit(EXTI_Line15);  //清除LINE15线路挂起位
+	 }
+}
+
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */

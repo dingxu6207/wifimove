@@ -96,9 +96,6 @@ u16 Stepcounter = 0;
 bool Movestep(uc16 TimeMs, u16 uReCmdStep)
 {
     bool bBreakCount = false;
-	/* 开启电机 */
-	GPIO_SetBits(EN_GPIO_PORT, EN_GPIO_PIN);
-
 	/* 00 */
 	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
@@ -141,8 +138,7 @@ bool Movestep(uc16 TimeMs, u16 uReCmdStep)
 		return bBreakCount;
 	}
 
-	/* 关闭电机 */
-	GPIO_ResetBits(GPIOA, GPIO_Pin_4);	
+	
 	return bBreakCount;
 }
 
@@ -217,15 +213,20 @@ bool MovestepL(uc16 TimeMs, u16 uReCmdStep)
 
 void initalMoveR(void)
 {
-	GPIO_SetBits(GPIOA, GPIO_Pin_2);
+	/* 关闭电机 */
+	GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);	
+	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
+
 	Delay_ms(200);
 }
 
 void initalMoveL(void)
 {
-	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
-	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
+	/* 关闭电机 */
+	GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);	
+	GPIO_SetBits(GPIOA, GPIO_Pin_2);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_3);	
 	Delay_ms(200);
 }
 
