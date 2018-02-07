@@ -1,9 +1,18 @@
----- TimingDelay_Decrement Matches (5 in 3 files) ----
-bsp_SysTick.c (user\systick):void TimingDelay_Decrement(void)
-Stm32f10x_it.c (user):extern void TimingDelay_Decrement(void);
-Stm32f10x_it.c (user):	TimingDelay_Decrement();	
-SysTick.htm (output):<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimingDelay_Decrement
-SysTick.htm (output):<P><STRONG><a name="[57]"></a>TimingDelay_Decrement</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, bsp_systick.o(.text))
----- TimingDelay_Decrement Search Errors Encountered (1) ----
-The following 1 files could not be processed:
-E:\stm32_text\ÂË¹âÆ¬\wifimove\Output\SysTick.build_log.htm : File could not be opened.
+---- WIFIUART_RxBuffer Matches (17 in 5 files) ----
+ESP8266.c (user\esp8266):			if (strstr((char*)WIFIUART_RxBuffer, "OK"))
+Main.c (user):	sprintf((char*)WIFIUART_RxBuffer, "%s", ":F+725#");
+Main.c (user):			printf("%s is ok\n", WIFIUART_RxBuffer);
+Main.c (user):			if (WIFIUART_RxBuffer[0] == ':')
+Main.c (user):				if (WIFIUART_RxBuffer[1] == 'F')
+Main.c (user):					if (WIFIUART_RxBuffer[2] == '+')
+Main.c (user):                        uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);												
+Main.c (user):					else if (WIFIUART_RxBuffer[2] == '-')
+Main.c (user):						uCmdStep = atoi((char const *)WIFIUART_RxBuffer + 3);								
+Main.c (user):					else if (WIFIUART_RxBuffer[2] == 'V')
+Main.c (user):							SetTime = atoi((char const *)WIFIUART_RxBuffer + 3);
+Stm32f10x_it.c (user):                WIFIUART_RxBuffer[WIFIUART_RxPtr] = data;
+Stm32f10x_it.c (user):                WIFIUART_RxBuffer[WIFIUART_RxPtr + 1]=0x00;
+Stm32f10x_it.c (user):                WIFIUART_RxBuffer[WIFIUART_RxPtr - 1] = data;
+WifiUsart..c (user\uart3):unsigned char WIFIUART_RxBuffer[WIFIUART_RX_BUFFER_SIZE];
+WifiUsart..c (user\uart3):  WIFIUART_RxBuffer[WIFIUART_RxPtr] = 0;
+WifiUsart.h (user\uart3):extern unsigned char WIFIUART_RxBuffer[WIFIUART_RX_BUFFER_SIZE];

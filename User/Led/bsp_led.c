@@ -218,7 +218,7 @@ void initalMoveR(void)
 	GPIO_ResetBits(GPIOA, GPIO_Pin_2);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_3);
 
-	Delay_ms(200);
+	//Delay_ms(200);
 }
 
 void initalMoveL(void)
@@ -227,7 +227,7 @@ void initalMoveL(void)
 	GPIO_ResetBits(EN_GPIO_PORT, EN_GPIO_PIN);	
 	GPIO_SetBits(GPIOA, GPIO_Pin_2);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_3);	
-	Delay_ms(200);
+	//Delay_ms(200);
 }
 
 /*********************************************END OF FILE**********************/

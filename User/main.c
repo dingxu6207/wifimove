@@ -94,7 +94,7 @@ int main(void)
 				{				
 					if (WIFIUART_RxBuffer[2] == '+')
 					{					 
-					  initalMoveR();
+					  //initalMoveR();
 						/* 开启电机 */
 						GPIO_SetBits(EN_GPIO_PORT, EN_GPIO_PIN);
 											
@@ -121,7 +121,7 @@ int main(void)
 					else if (WIFIUART_RxBuffer[2] == '-')
 					{
 						
-						  initalMoveL();
+						//  initalMoveL();
 						/* 开启电机 */
 						GPIO_SetBits(EN_GPIO_PORT, EN_GPIO_PIN);
 																	
