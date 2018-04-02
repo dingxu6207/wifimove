@@ -28,7 +28,7 @@ void ESP8266_Set(unsigned char *puf) // 数组指针*puf指向字符串数组
 
 
 unsigned char ipstr[100] = {0};
-unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.75.125\",8080";
+unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
 void SetIP(unsigned char *pReIP)
 {
 	pReIP = pReIP + 3;
