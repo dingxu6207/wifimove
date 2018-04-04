@@ -3,7 +3,7 @@
 #include "bsp_SysTick.h"
 #include "bsp_usart.h"
 #include "bsp_led.h"
-
+#include "WRFlash.h"
 
 void ESP8266_Set(unsigned char *puf) // 数组指针*puf指向字符串数组  
 {
@@ -26,37 +26,49 @@ void ESP8266_Set(unsigned char *puf) // 数组指针*puf指向字符串数组
       Delay_ms(2000);
 }
 
-
-unsigned char ipstr[100] = {0};
-unsigned char Cmdstr[100] = "AT+CIPSTART=\"TCP\",\"192.168.43.78\",8080";
+UnionData UD;
+unsigned char ipstr[52] = {0};
+//unsigned char Cmdstr[52] = "AT+CIPSTART=\"TCP\",\"192.168.80.73\",8080";
 void SetIP(unsigned char *pReIP)
 {
 	pReIP = pReIP + 3;
 	sprintf ( (char*)ipstr, "\"%s\",\"%s\",%s", "TCP", pReIP, "8080" );
-	sprintf ( (char*)Cmdstr, "AT+CIPSTART=%s", ipstr );
+	//sprintf ( (char*)Cmdstr, "AT+CIPSTART=%s", ipstr );
+	
+	sprintf ( (char*)UD.CfgData.Cmdstr, "AT+CIPSTART=%s", ipstr );
 	printf("ip %s is ok!\n", ipstr);
+	
+	Write_Flash(UD.SaveArray, 30);
 }
 
-unsigned char NameStr[100] = "\"ynao\"";
+//unsigned char NameStr[52] = "\"ynao\"";
 void SetWifiName(unsigned char *pReName)
 {
 	pReName = pReName + 3;
-	sprintf((char *)NameStr, "\"%s\"", pReName);
+	sprintf((char *)UD.CfgData.NameStr, "\"%s\"", pReName);
+	  
 	printf("set wifi name %s is ok!\n", pReName);
 }
 
-unsigned char CodeString[100] = "\"ynao246135\"";
+//unsigned char CodeString[52] = "\"ynao246135\"";
 void SetWifiCode(unsigned char *pReCode)
 {
 	pReCode = pReCode + 3;
-	sprintf((char *)CodeString, "\"%s\"", pReCode);
-	printf("set code %s is ok!\n", CodeString);
+	sprintf((char *)UD.CfgData.CodeString, "\"%s\"", pReCode);
+	printf("set code %s is ok!\n", UD.CfgData.CodeString);
+	
 }
 
 unsigned char CmdNameCode[100] = "AT+CWJAP=\"ynao\",\"ynao246135\"";
 void SetNameCode(void)
-{
-	sprintf((char *)CmdNameCode, "AT+CWJAP=%s,%s", NameStr, CodeString);
+{          
+	  Read_Flash(UD.SaveArray, 30);
+	  #if 0
+    printf("UD.CfgData.Cmdstr = %s\n", UD.CfgData.Cmdstr);
+	  printf("UD.CfgData.NameStr = %s\n", UD.CfgData.NameStr);
+	  printf("UD.CfgData.CodeString = %s\n", UD.CfgData.CodeString);
+	  #endif
+	  sprintf((char *)CmdNameCode, "AT+CWJAP=%s,%s", UD.CfgData.NameStr, UD.CfgData.CodeString);	
 }
 
 void SetWifiConnect(void)
@@ -70,7 +82,7 @@ void SetWifiConnect(void)
 		 //CmdString("AT+CWJAP=\"A304\",\"wildfire\"");
 		 CmdString(CmdNameCode);
 		 CmdString("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
-		 CmdString(Cmdstr);
+		 CmdString(UD.CfgData.Cmdstr);
 		 CmdString("AT+CIPMODE=1");//透传模式	
 		 CmdString("AT+CIPSEND");//检测是否连接成功
 	   Wifiuart_FlushRxBuffer();

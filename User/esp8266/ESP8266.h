@@ -28,5 +28,23 @@ void ESP8266_Rst( void );
 #define     macESP8266_RST_HIGH_LEVEL()        GPIO_SetBits ( Wien_GPIO_PORT, Wien_GPIO_PIN )
 #define     macESP8266_RST_LOW_LEVEL()         GPIO_ResetBits ( Wien_GPIO_PORT, Wien_GPIO_PIN )
 
+typedef union//union只能对第一个变量初始化
+{
+    struct
+    {
+			   
+			//NAME
+			unsigned char NameStr[16];
+
+			//Code
+			unsigned char CodeString[16];
+
+			//ip
+			unsigned char  Cmdstr[52];
+			
+    } CfgData;
+		u32 SaveArray[30];
+}UnionData; 
+
 #endif
 

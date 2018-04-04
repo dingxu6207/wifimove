@@ -361,7 +361,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Led;..\..\User\SysTick;..\..\User\esp8266;..\..\User\uart1;..\..\User\uart3;..\..\User\exti</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Led;..\..\User\SysTick;..\..\User\esp8266;..\..\User\uart1;..\..\User\uart3;..\..\User\exti;..\..\User\DoFlash</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -613,6 +613,11 @@
               <FileName>bsp_exti.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\exti\bsp_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>WRFlash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\DoFlash\WRFlash.c</FilePath>
             </File>
           </Files>
         </Group>
