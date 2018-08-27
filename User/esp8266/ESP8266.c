@@ -59,7 +59,7 @@ void SetWifiCode(unsigned char *pReCode)
 	
 }
 
-unsigned char CmdNameCode[100] = "AT+CWJAP=\"ynao\",\"ynao246135\"";
+unsigned char CmdNameCode[100] = "AT+CWJAP_DEF=\"ynao\",\"ynao246135\"";
 void SetNameCode(void)
 {          
 	  Read_Flash(UD.SaveArray, 30);
@@ -68,7 +68,7 @@ void SetNameCode(void)
 	  printf("UD.CfgData.NameStr = %s\n", UD.CfgData.NameStr);
 	  printf("UD.CfgData.CodeString = %s\n", UD.CfgData.CodeString);
 	  #endif
-	  sprintf((char *)CmdNameCode, "AT+CWJAP=%s,%s", UD.CfgData.NameStr, UD.CfgData.CodeString);	
+	  sprintf((char *)CmdNameCode, "AT+CWJAP_DEF=%s,%s", UD.CfgData.NameStr, UD.CfgData.CodeString);	
 }
 
 void SetWifiConnect(void)
@@ -78,14 +78,14 @@ void SetWifiConnect(void)
 		 CmdString("AT"); //测试
 		 CmdString("AT+RST"); //测试
 		
-		 CmdString("AT+CWMODE=1");     //设置路由器模式 1 station模式 2 AP	
+		 CmdString("AT+CWMODE_DEF=1");     //设置路由器模式 1 station模式 2 AP	
 		 //CmdString("AT+CWJAP=\"A304\",\"wildfire\"");
 		 CmdString(CmdNameCode);
-		 CmdString("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
+		 //CmdString("AT+CIPMUX=0");//开启多连接模式，允许多个各客户端接入
 		 CmdString(UD.CfgData.Cmdstr);
 		 CmdString("AT+CIPMODE=1");//透传模式	
 		 CmdString("AT+CIPSEND");//检测是否连接成功
-	   Wifiuart_FlushRxBuffer();
+	     Wifiuart_FlushRxBuffer();
 
 }
   
